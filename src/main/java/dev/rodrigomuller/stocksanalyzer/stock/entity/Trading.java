@@ -24,11 +24,17 @@ public class Trading {
     @Column
     private Integer volume;
 
-    @Column(name = "opening_price")
+    @Column(name = "opening_price", nullable = false)
     private Float openingPrice;
 
-    @Column(name = "closing_price")
+    @Column(name = "closing_price", nullable = false)
     private Float closingPrice;
+
+    @Column(name = "highest_price")
+    private Float highestPrice;
+
+    @Column(name = "lowest_price")
+    private Float lowestPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")

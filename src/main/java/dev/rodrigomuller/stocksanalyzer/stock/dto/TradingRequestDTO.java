@@ -29,4 +29,10 @@ public class TradingRequestDTO {
     @NotNull
     @PositiveOrZero
     private Float closingPrice;
+
+    @PositiveOrZero
+    private Float highestPrice;
+
+    @PositiveOrZero
+    private Float lowestPrice;
 }

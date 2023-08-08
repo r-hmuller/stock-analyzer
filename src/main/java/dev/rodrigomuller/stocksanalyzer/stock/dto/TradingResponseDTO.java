@@ -21,4 +21,8 @@ public class TradingResponseDTO {
     private Float openingPrice;
 
     private Float closingPrice;
+
+    private Float highestPrice;
+
+    private Float lowestPrice;
 }
