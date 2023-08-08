@@ -1,6 +1,5 @@
 package dev.rodrigomuller.stocksanalyzer.stock.dto;
 
-import dev.rodrigomuller.stocksanalyzer.stock.entity.Company;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +21,4 @@ public class TradingResponseDTO {
     private Float openingPrice;
 
     private Float closingPrice;
-
-    private Company company;
 }

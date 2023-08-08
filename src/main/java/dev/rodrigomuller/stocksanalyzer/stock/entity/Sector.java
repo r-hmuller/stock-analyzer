@@ -8,5 +8,5 @@ public enum Sector {
     LOGISTICS,
     FINANCIAL,
     RETAIL,
-
+    OTHER,
 }
