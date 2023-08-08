@@ -2,18 +2,17 @@ package dev.rodrigomuller.stocksanalyzer.stock.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = "tradings")
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

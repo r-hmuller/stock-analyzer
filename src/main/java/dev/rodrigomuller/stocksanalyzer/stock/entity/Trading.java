@@ -1,18 +1,18 @@
 package dev.rodrigomuller.stocksanalyzer.stock.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = "company")
 public class Trading {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,5 +32,6 @@ public class Trading {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
+    @JsonIgnore
     private Company company;
 }

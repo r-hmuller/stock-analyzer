@@ -68,7 +68,14 @@ public class CompanyService {
         Trading trading = tradingMapper.fromRequestDTO(tradingRequestDTO);
         trading.setCompany(company);
         trading = tradingRepository.save(trading);
-        company.getTradings().add(trading);
+
+        Set<Trading> tradings = company.getTradings();
+        boolean addedTrading = tradings.add(trading);
+
+        if (addedTrading) {
+            company.setTradings(tradings);
+            companyRepository.save(company);
+        }
 
         return tradingMapper.toResponseDTO(trading);
     }
