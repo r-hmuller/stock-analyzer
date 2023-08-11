@@ -4,11 +4,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import dev.rodrigomuller.stocksanalyzer.stock.dto.CompanyRequestDTO;
 import dev.rodrigomuller.stocksanalyzer.stock.dto.CompanyResponseDTO;
-import dev.rodrigomuller.stocksanalyzer.stock.dto.TradingRequestDTO;
-import dev.rodrigomuller.stocksanalyzer.stock.dto.TradingResponseDTO;
 import dev.rodrigomuller.stocksanalyzer.stock.entity.Company;
 import dev.rodrigomuller.stocksanalyzer.stock.entity.Sector;
-import dev.rodrigomuller.stocksanalyzer.stock.entity.Trading;
 import dev.rodrigomuller.stocksanalyzer.stock.entity.TradingMarket;
 import dev.rodrigomuller.stocksanalyzer.stock.mapper.CompanyMapper;
 import dev.rodrigomuller.stocksanalyzer.stock.mapper.TradingMapper;
@@ -31,14 +28,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class CompanyService {
     private final CompanyRepository companyRepository;
     private final CompanyMapper companyMapper;
-    private final TradingMapper tradingMapper;
-    private final TradingRepository tradingRepository;
     @Value("${populate-database}")
     private String populateDatabase;
 
@@ -73,31 +67,6 @@ public class CompanyService {
 
     private Company findById(Long id) {
         return companyRepository.findById(id).orElseThrow();
-    }
-
-    public TradingResponseDTO addTrading(Long companyId, TradingRequestDTO tradingRequestDTO) {
-        Company company = companyRepository.getReferenceById(companyId);
-
-        Trading trading = tradingMapper.fromRequestDTO(tradingRequestDTO);
-        trading.setCompany(company);
-        trading = tradingRepository.save(trading);
-
-        Set<Trading> tradings = company.getTradings();
-        boolean addedTrading = tradings.add(trading);
-
-        if (addedTrading) {
-            company.setTradings(tradings);
-            companyRepository.save(company);
-        }
-
-        return tradingMapper.toResponseDTO(trading);
-    }
-
-    public Set<TradingResponseDTO> listTrading(Long companyId) {
-        Company company = findById(companyId);
-        Set<Trading> tradings = company.getTradings();
-        System.out.println("--------" + company.getTradings());
-        return tradingMapper.listResponseDTO(tradings);
     }
 
     @EventListener(ApplicationReadyEvent.class)
