@@ -40,8 +40,6 @@ public class CompanyService {
     public CompanyService(CompanyRepository companyRepository, CompanyMapper companyMapper, TradingRepository tradingRepository, TradingMapper tradingMapper) {
         this.companyRepository = companyRepository;
         this.companyMapper = companyMapper;
-        this.tradingMapper = tradingMapper;
-        this.tradingRepository = tradingRepository;
     }
 
     public CompanyResponseDTO find(Long id) {
@@ -106,7 +104,7 @@ public class CompanyService {
         File file = ResourceUtils.getFile(path);
         List<List<String>> records = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(file))) {
-            String[] values = null;
+            String[] values;
             while ((values = csvReader.readNext()) != null) {
                 records.add(Arrays.asList(values));
             }
