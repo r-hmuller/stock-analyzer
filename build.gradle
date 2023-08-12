@@ -27,6 +27,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-quartz'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp:3.1.2'
+    // https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit
+    implementation 'org.springframework.amqp:spring-rabbit:3.0.7'
     // https://mvnrepository.com/artifact/org.springframework/spring-webflux
     implementation 'org.springframework:spring-webflux:6.0.11'
     compileOnly 'org.projectlombok:lombok'

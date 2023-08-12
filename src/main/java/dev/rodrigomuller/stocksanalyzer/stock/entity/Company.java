@@ -3,7 +3,10 @@ package dev.rodrigomuller.stocksanalyzer.stock.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -33,4 +36,10 @@ public class Company {
     @OneToMany(mappedBy = "company")
     @JsonIgnore
     private Set<Trading> tradings;
+
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
+
+    @UpdateTimestamp
+    private LocalDateTime updateDateTime;
 }

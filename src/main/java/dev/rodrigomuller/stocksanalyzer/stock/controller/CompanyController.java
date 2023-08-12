@@ -69,7 +69,7 @@ public class CompanyController {
 
     @PostMapping("/{id}/tradings/sync")
     public ResponseEntity<?> syncCompanyTrading(@PathVariable Long id) {
-        tradingService.syncTrading(id);
+        tradingService.emitEvent(id);
         return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
     }
 }
