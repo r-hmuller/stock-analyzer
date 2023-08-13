@@ -11,6 +11,8 @@ import dev.rodrigomuller.stocksanalyzer.stock.repository.CompanyRepository;
 import dev.rodrigomuller.stocksanalyzer.stock.repository.TradingRepository;
 import dev.rodrigomuller.stocksanalyzer.stock.service.providers.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -78,9 +80,9 @@ public class TradingService {
         return tradingMapper.toResponseDTO(trading);
     }
 
-    public Set<TradingResponseDTO> listTrading(Long companyId) {
+    public Page<TradingResponseDTO> listTrading(Long companyId, Pageable pageable) {
         Company company = companyRepository.findById(companyId).orElseThrow();
-        Set<Trading> tradings = company.getTradings();
-        return tradingMapper.listResponseDTO(tradings);
+
+        return tradingRepository.findAllByCompany(company, pageable).map(tradingMapper::toResponseDTO);
     }
 }

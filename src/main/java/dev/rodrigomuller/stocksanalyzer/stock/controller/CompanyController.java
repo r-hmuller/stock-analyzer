@@ -8,12 +8,11 @@ import dev.rodrigomuller.stocksanalyzer.stock.service.CompanyService;
 import dev.rodrigomuller.stocksanalyzer.stock.service.TradingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/companies")
@@ -30,8 +29,8 @@ public class CompanyController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<CompanyResponseDTO>> listAll() {
-        List<CompanyResponseDTO> companies = companyService.listAll();
+    public ResponseEntity<Page<CompanyResponseDTO>> listAll(Pageable pageable) {
+        Page<CompanyResponseDTO> companies = companyService.listAll(pageable);
         return new ResponseEntity<>(companies, HttpStatus.OK);
     }
 
@@ -61,9 +60,8 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}/tradings")
-    public ResponseEntity<Set<TradingResponseDTO>> getTradings(@PathVariable Long id) {
-        Set<TradingResponseDTO> tradings = tradingService.listTrading(id);
-        System.out.println(tradings);
+    public ResponseEntity<Page<TradingResponseDTO>> getTradings(@PathVariable Long id, Pageable pageable) {
+        Page<TradingResponseDTO> tradings = tradingService.listTrading(id, pageable);
         return new ResponseEntity<>(tradings, HttpStatus.OK);
     }
 

@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -47,9 +47,9 @@ public class CompanyService {
         return companyMapper.toResponseDTO(company);
     }
 
-    public List<CompanyResponseDTO> listAll() {
-        Page<Company> companies = companyRepository.findAll(PageRequest.of(0, 20));
-        return companyMapper.listResponseDTO(companies.toList());
+    public Page<CompanyResponseDTO> listAll(Pageable pageable) {
+        Page<Company> companies = companyRepository.findAll(pageable);
+        return companies.map(companyMapper::toResponseDTO);
     }
 
     public CompanyResponseDTO save(CompanyRequestDTO companyRequestDTO) {
