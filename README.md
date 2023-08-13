@@ -19,9 +19,10 @@ A lot of things, really.
 
 A non-exhaustive list includes:
 
-- [ ] Make the "sync" route async (using RabbitMQ or 0MQ, or something else)
+- [x] Make the "sync" route async (using RabbitMQ or 0MQ, or something else): I choose RabbitMQ :)
 - [ ] Aggregate data. For example, get the highest and lowest prices in a date range.
 - [ ] Create a proper docker for this project.
 - [ ] Create a front-end to consume this API.
 - [ ] Make those routes protected using Spring Security.
 - [ ] Create more tests.
+- [x] Make list request to be pageable.
